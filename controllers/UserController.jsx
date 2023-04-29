@@ -14,7 +14,6 @@ exports.AddUser = (req, res) => {
                 const userData = {
                     ...data,
                     password: encryptedPassword
-
                 }
                 const user = new User(userData);
                 user
@@ -36,8 +35,6 @@ exports.AddUser = (req, res) => {
 
 exports.SignIn = (req, res) => {
     const { email, password } = req.body;
-    console.log("email>>>", email)
-
     User.findOne({ email })
         .then(async (user) => {
             if (!user) {
@@ -55,8 +52,6 @@ exports.SignIn = (req, res) => {
                 return res.status(200).json({ user, token })
             } else {
                 res.status(402).json({ message: "Wrong password or email" })
-                console.log("pass>>>", password)
-                console.log("pass2>>", user.password)
             }
         })
         .catch((error) => {

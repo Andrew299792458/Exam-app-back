@@ -1,8 +1,13 @@
 const Task = require("../models/Task.jsx")
 
 exports.CreateTask = async (req, res) => {
-    const data = req.body;
-    const userId = req.user.id
+    const data = req.body.taskData;
+    let userId
+    if (req.body.role !== "admin") {
+        userId = req.user.id
+    } else {
+        userId = req.body.userId
+    }
     const task = new Task({
         ...data,
         userId
