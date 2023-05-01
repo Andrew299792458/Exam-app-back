@@ -32,14 +32,22 @@ exports.GetTasks = (req, res) => {
         .then(async (tasks) => {
             console.log("get tasks")
             return res.status(200).json({ tasks })
+        }).catch((err) => {
+            console.log(err)
+            res.status(500).json({ message: "Error Get Tasks" })
         })
 }
 
 exports.GetAllTasks = (req, res) => {
+    const role = req.body
+    console.log("role>>>", role)
     Task.find()
         .then(async (tasks) => {
             console.log("get tasks")
             return res.status(200).json({ tasks })
+        }).catch((err) => {
+            console.log(err)
+            res.status(500).json({ message: "Error Get All Tasks" })
         })
 }
 

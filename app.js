@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 app.use(express.static('public'));
 app.use(express.json());
 const UserMiddleware = require("./middleware/UserMiddleware.jsx")
-const AdminMiddleware = require("./middleware/UserMiddleware.jsx")
+const AdminMiddleware = require("./middleware/AdminMiddleware.jsx")
 const signInValidation = require("./validations/SignInValidation.jsx")
 const { PORT, HOST, DB } = require("./constants/index");
 const { AddUser, SignIn, me, AllUsers } = require("./controllers/UserController.jsx");
@@ -32,9 +32,9 @@ app.get("/me", UserMiddleware, me)
 app.post("/sign-in", signInValidation, SignIn)
 app.post("/create-task", UserMiddleware, CreateTask)
 app.get("/get-tasks", UserMiddleware, GetTasks)
-app.get("/get-all-tasks", AdminMiddleware, GetAllTasks)
+app.get("/get-all-tasks", GetAllTasks)
 app.put("/update-task", UserMiddleware, UpdateTask)
-app.get("/users", AdminMiddleware, AllUsers)
+app.post("/users", AdminMiddleware, AllUsers)
 app.delete("/delete-task", DeleteTask)
 server.listen(PORT, HOST, (error) => {
     if (error) {

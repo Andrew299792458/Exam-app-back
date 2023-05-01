@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken');
 require("dotenv").config()
 
 module.exports = (req, res, next) => {
-
-    const userRole = req.user.role;
+    const userRole = req.body.role;
     if (userRole === "admin") {
         const token = req.headers["x-access-token"]
         if (!token) {

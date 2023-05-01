@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User.jsx")
 
 exports.AddUser = (req, res) => {
-    const data = req.body;
+    const data = req.body.userData;
     User.findOne({ email: data.email })
         .then(async (user) => {
             if (user) {
